@@ -1,13 +1,7 @@
 {
-  "replace": "false",
+  "replace": false,
   "values": [
-    {
-      "id": "tjetpacks:pilot_goggles_gold",
-      "required": false
-    },
-    {
-      "id": "tjetpacks:pilot_goggles_iron",
-      "required": false
-    }
+    "tjetpacks:pilot_goggles_iron",
+    "tjetpacks:pilot_goggles_gold"
   ]
 }

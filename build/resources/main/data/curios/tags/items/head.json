@@ -1,13 +1,8 @@
 {
-  "replace": "false",
+  "replace": false,
   "values": [
-    {
-      "id": "tjetpacks:pilot_goggles_gold",
-      "required": false
-    },
-    {
-      "id": "tjetpacks:pilot_goggles_iron",
-      "required": false
-    }
+    "minecraft:diamond_helmet",
+    "tjetpacks:pilot_goggles_iron",
+    "tjetpacks:pilot_goggles_gold"
   ]
 }

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "bbb",
+    "bnb",
+    "bbb"
+  ],
+  "key": {
+    "n": {
+      "item": "minecraft:nether_star"
+    },
+    "b": {
+      "item": "thermal:blizz_powder"
+    }
+  },
+  "result": {
+    "item": "tjetpacks:cryogenic_crystal",
+    "count": 1
+  }
+}

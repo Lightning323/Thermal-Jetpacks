@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "b b",
+    "bsb",
+    "b b"
+  ],
+  "key": {
+    "b": {
+      "tag": "forge:plates/nickel"
+    },
+    "s": {
+      "item": "thermal:redstone_servo"
+    }
+  },
+  "result": {
+    "item": "tjetpacks:combustion_chamber",
+    "count": 1
+  }
+}

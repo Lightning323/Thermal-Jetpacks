@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Specification-Title: tjetpacks
+Specification-Vendor: 
+Specification-Version: 1
+Implementation-Title: tjetpacks
+Implementation-Version: 1.0.0
+Implementation-Vendor: 
+Implementation-Timestamp: 2025-11-20T10:09:27-0700
+MixinConfigs: tjetpacks.mixins.json
+

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iii",
+    "ses",
+    "t t"
+  ],
+  "key": {
+    "s": {
+      "item": "tjetpacks:leather_strap"
+    },
+    "i": {
+      "item": "thermal:lead_ingot"
+    },
+    "e": {
+      "item": "minecraft:elytra"
+    },
+    "t": {
+      "item": "tjetpacks:thruster_te1"
+    }
+  },
+  "result": {
+    "item": "tjetpacks:jetpack_te1",
+    "count": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "s  ",
+    "sis",
+    "  s"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:leather"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "tjetpacks:leather_strap",
+    "count": 4
+  }
+}

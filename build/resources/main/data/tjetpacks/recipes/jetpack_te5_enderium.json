@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "tjetpacks:flux_chestplate"
+  },
+  "base": {
+    "item": "tjetpacks:jetpack_te4"
+  },
+  "result": {
+    "item": "tjetpacks:jetpack_te5_enderium"
+  },
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  }
+}

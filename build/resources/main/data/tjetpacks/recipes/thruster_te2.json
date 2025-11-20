@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "UCU",
+    "iti",
+    "i i"
+  ],
+  "key": {
+    "i": {
+      "tag": "forge:plates/invar"
+    },
+    "C": {
+      "item": "tjetpacks:combustion_chamber"
+    },
+    "t": {
+      "item": "thermal:lightning_charge"
+    },
+    "U": {
+      "item": "thermal:upgrade_augment_1"
+    }
+  },
+  "result": {
+    "item": "tjetpacks:thruster_te2",
+    "count": 1
+  }
+}

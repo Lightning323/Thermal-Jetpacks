@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "i i",
+    "rsr",
+    "iei"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:netherite_chestplate"
+    },
+    "i": {
+      "item": "thermal:signalum_ingot"
+    },
+    "r": {
+      "item": "thermal:rf_coil"
+    },
+    "e": {
+      "item": "tjetpacks:cryogenic_crystal"
+    }
+  },
+  "result": {
+    "item": "tjetpacks:flux_chestplate",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iGi",
+    "iBi",
+    "i i"
+  ],
+  "key": {
+    "i": {
+      "tag": "forge:plates/lead"
+    },
+    "B": {
+      "item": "thermal:lightning_charge"
+    },
+    "G": {
+      "item": "tjetpacks:combustion_chamber"
+    }
+  },
+  "result": {
+    "item": "tjetpacks:thruster_te1",
+    "count": 1
+  }
+}

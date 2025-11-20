@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "UCU",
+    "iti",
+    "i i"
+  ],
+  "key": {
+    "i": {
+      "tag": "forge:plates/enderium"
+    },
+    "C": {
+      "item": "tjetpacks:combustion_chamber_hard"
+    },
+    "t": {
+      "item": "thermal:lightning_charge"
+    },
+    "U": {
+      "item": "thermal:upgrade_augment_3"
+    }
+  },
+  "result": {
+    "item": "tjetpacks:thruster_te4",
+    "count": 1
+  }
+}

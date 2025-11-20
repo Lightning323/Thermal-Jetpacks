@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "bsb",
+    "bFb",
+    "bsb"
+  ],
+  "key": {
+    "b": {
+      "tag": "forge:plates/nickel"
+    },
+    "s": {
+      "item": "thermal:redstone_servo"
+    },
+    "F": {
+      "item": "tjetpacks:combustion_chamber"
+    }
+  },
+  "result": {
+    "item": "tjetpacks:combustion_chamber_hard",
+    "count": 1
+  }
+}

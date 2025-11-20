@@ -1,0 +1,23 @@
+{
+  "jetpack": {
+    "category": "player",
+    "sounds": [
+      "tjetpacks:jetpack"
+    ],
+    "subtitle": "subtitle.tjetpacks.jetpack"
+  },
+  "jetpack_other": {
+    "category": "player",
+    "sounds": [
+      "tjetpacks:jetpack_other"
+    ],
+    "subtitle": "subtitle.tjetpacks.jetpack_other"
+  },
+  "rocket": {
+    "category": "player",
+    "sounds": [
+      "tjetpacks:rocket"
+    ],
+    "subtitle": "subtitle.tjetpacks.rocket"
+  }
+}

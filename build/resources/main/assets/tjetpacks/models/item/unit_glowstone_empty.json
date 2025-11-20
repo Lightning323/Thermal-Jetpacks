@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "tjetpacks:item/unit_glowstone_empty"
+  }
+}

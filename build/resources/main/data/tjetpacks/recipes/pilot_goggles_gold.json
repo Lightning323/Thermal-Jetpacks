@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " s ",
+    "GiG",
+    "i i"
+  ],
+  "key": {
+    "s": {
+      "item": "tjetpacks:leather_strap"
+    },
+    "i": {
+      "tag": "forge:plates/gold"
+    },
+    "G": {
+      "tag": "forge:glass"
+    }
+  },
+  "result": {
+    "item": "tjetpacks:pilot_goggles_gold",
+    "count": 1
+  }
+}

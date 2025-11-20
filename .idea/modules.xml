@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cyclicNexus.main.iml" filepath="$PROJECT_DIR$/.idea/modules/cyclicNexus.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cyclicNexus.test.iml" filepath="$PROJECT_DIR$/.idea/modules/cyclicNexus.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tjetpacks.main.iml" filepath="$PROJECT_DIR$/.idea/modules/tjetpacks.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tjetpacks.test.iml" filepath="$PROJECT_DIR$/.idea/modules/tjetpacks.test.iml" />
     </modules>
   </component>
 </project>

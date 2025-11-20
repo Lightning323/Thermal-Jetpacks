@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tjetpacks:pilot_goggles_iron"
+    },
+    {
+      "tag": "forge:plates/gold"
+    }
+  ],
+  "result": {
+    "item": "tjetpacks:pilot_goggles_gold",
+    "count": 1
+  }
+}

@@ -130,7 +130,9 @@ Tab Title: itemGroup.tjetpacks.main
 
     private final static ResourceLocation creativeTab_thermalTools = new ResourceLocation("thermal", "thermal.tools");
     private final static ResourceLocation creativeTab_thermalItems = new ResourceLocation("thermal", "thermal.items");
-//    private final static ResourceLocation creativeTab_custom = new ResourceLocation(MOD_ID, "my_tab");
+
+    //TODO: Make this a custom tab instead of vanilla
+    private final static ResourceLocation creativeTab_custom = new ResourceLocation("minecraft", "tools_and_utilities");
 
     private boolean toolsTab(Item item) {
         return item instanceof JetpackItem || item instanceof PilotGogglesItem;
@@ -142,7 +144,8 @@ Tab Title: itemGroup.tjetpacks.main
                 Item item = i.get();
                 if (toolsTab(item)) {
                     event.accept(new ItemStack(item));
-                    if (item instanceof JetpackItem jetpackItem) event.accept(jetpackItem.asChargedCopy());
+                    if (item instanceof JetpackItem jetpackItem && !jetpackItem.isCreative)
+                        event.accept(jetpackItem.asChargedCopy());
                 }
             }
         } else if (event.getTab() == BuiltInRegistries.CREATIVE_MODE_TAB.get(creativeTab_thermalItems)) {
@@ -154,46 +157,22 @@ Tab Title: itemGroup.tjetpacks.main
             }
         }
         //If there are no thermal tabs, add to the custom tab
-//        else if (event.getTab() == BuiltInRegistries.CREATIVE_MODE_TAB.get(creativeTab_custom)) {
-//            for (RegistryObject<Item> i : RegistryHandler.ITEMS.getEntries()) {
-//                Item item = i.get();
-//                event.accept(new ItemStack(item));
-//                if (item instanceof JetpackItem jetpackItem) {
-//                    event.accept(jetpackItem.asChargedCopy());
-//                }
-//            }
-//        }
+        else if (!ModList.get().isLoaded("thermal")
+                && event.getTab() == BuiltInRegistries.CREATIVE_MODE_TAB.get(creativeTab_custom)) {
+            for (RegistryObject<Item> i : RegistryHandler.ITEMS.getEntries()) {
+                Item item = i.get();
+                event.accept(new ItemStack(item));
+                if (item instanceof JetpackItem jetpackItem) {
+                    event.accept(jetpackItem.asChargedCopy());
+                }
+            }
+        }
     }
 
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         NetworkHandler.registerMessages();
     }
-
-    //TODO: Add a custom creative tab if the thermal mod is not loaded
-//    @SubscribeEvent
-//    public static void registerTabs(RegisterEvent event) {
-//        if (!event.getRegistryKey().equals(Registries.CREATIVE_MODE_TAB)) return;
-//
-//        // If Thermal mods are installed, skip creating your tab
-//        if (ModList.get().isLoaded("thermal")) {
-//            LOGGER.info("Thermal is present → no custom tab needed");
-//            return;
-//        }
-//
-//        LOGGER.info("Thermal NOT found → creating custom tab");
-//
-//        event.register(Registries.CREATIVE_MODE_TAB, helper -> helper.register(
-//                creativeTab_custom,
-//                CreativeModeTab.builder()
-//                        .title(Component.translatable("itemGroup.my_tab"))
-//                        .icon(() -> new ItemStack(RegistryHandler.COMBUSTION_CHAMBER.get()))
-//                        .displayItems((params, output) -> {
-//                            output.accept(Items.DIAMOND);
-//                        })
-//                        .build()
-//        ));
-//    }
 
 
     private void clientSetup(final FMLClientSetupEvent event) {

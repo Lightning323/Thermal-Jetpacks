@@ -3,8 +3,8 @@ Specification-Title: tjetpacks
 Specification-Vendor: Lightning323
 Specification-Version: 1
 Implementation-Title: tjetpacks
-Implementation-Version: 1.3.1
+Implementation-Version: 1.3.2
 Implementation-Vendor: Lightning323
-Implementation-Timestamp: 2025-11-20T14:30:11-0700
+Implementation-Timestamp: 2025-11-20T14:53:10-0700
 MixinConfigs: tjetpacks.mixins.json
 

@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:diamond_helmet",
     "tjetpacks:pilot_goggles_iron",
     "tjetpacks:pilot_goggles_gold"
   ]

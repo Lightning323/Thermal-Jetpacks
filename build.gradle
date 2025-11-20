@@ -167,6 +167,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:thermalinnovation-291737:5372751")
     runtimeOnly fg.deobf("curse.maven:thermal-dynamics-227443:5372747")
 
+    runtimeOnly fg.deobf("curse.maven:sophisticated-backpacks-422301:7169873")
 
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html

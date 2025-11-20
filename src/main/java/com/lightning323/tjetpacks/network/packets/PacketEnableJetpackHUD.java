@@ -28,7 +28,7 @@ public class PacketEnableJetpackHUD {
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            System.out.println("Toggling HUD: " + enabled);
+            System.out.println("Jetpack HUD: " + enabled);
             HUDHandler.renderJetpackHUD = enabled;
         });
         ctx.get().setPacketHandled(true);

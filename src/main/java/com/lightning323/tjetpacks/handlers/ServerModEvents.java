@@ -1,6 +1,7 @@
 package com.lightning323.tjetpacks.handlers;
 
 import com.lightning323.tjetpacks.RegistryHandler;
+import com.lightning323.tjetpacks.item.PilotGogglesItem;
 import com.lightning323.tjetpacks.network.NetworkHandler;
 import com.lightning323.tjetpacks.network.packets.PacketEnableJetpackHUD;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,25 +18,13 @@ import static com.lightning323.tjetpacks.ThermalJetpacks.MOD_ID;
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class ServerModEvents {
 
-//    @SubscribeEvent
-//    public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
-//        ServerPlayer player = (ServerPlayer) event.getEntity();
-//        // Your logic here
-//    }
-
     @SubscribeEvent
     public static void onEquipmentChange(LivingEquipmentChangeEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
 
-        /**
-         * Create an event to turn on the HUD when the player equips the goggles
-         */
-        if (event.getTo().getItem() == RegistryHandler.PILOT_GOGGLES_GOLD.get() ||
-                event.getTo().getItem() == RegistryHandler.PILOT_GOGGLES_IRON.get()) {
+        if (event.getTo().getItem() instanceof PilotGogglesItem) {
             NetworkHandler.sendToClient(new PacketEnableJetpackHUD(true), (ServerPlayer) player);
-
-        } else if (event.getFrom().getItem() == RegistryHandler.PILOT_GOGGLES_GOLD.get() ||
-                event.getFrom().getItem() == RegistryHandler.PILOT_GOGGLES_IRON.get()) {
+        } else if (event.getFrom().getItem() instanceof PilotGogglesItem) {
             NetworkHandler.sendToClient(new PacketEnableJetpackHUD(false), (ServerPlayer) player);
         }
 

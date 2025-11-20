@@ -7,14 +7,16 @@ import com.lightning323.tjetpacks.handlers.CommonJetpackHandler;
 import com.lightning323.tjetpacks.handlers.KeybindHandler;
 import com.lightning323.tjetpacks.integration.CuriosIntegration;
 import com.lightning323.tjetpacks.item.JetpackItem;
-import com.lightning323.tjetpacks.item.ModItemGroup;
 import com.lightning323.tjetpacks.item.PilotGogglesItem;
 import com.lightning323.tjetpacks.network.NetworkHandler;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -29,7 +31,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegisterEvent;
+import net.minecraftforge.registries.RegistryObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import top.theillusivec4.curios.api.CuriosCapability;
@@ -100,17 +103,10 @@ Tab ID: tjetpacks:tjetpacks.main
 Tab Title: itemGroup.tjetpacks.main
      */
 
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
-
 
     public static final Logger LOGGER = LogManager.getLogger();
 
     public ThermalJetpacks() {
-
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
-
-
         var bus = FMLJavaModLoadingContext.get().getModEventBus();
 
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
@@ -123,50 +119,84 @@ Tab Title: itemGroup.tjetpacks.main
         }
 
         MinecraftForge.EVENT_BUS.register(this);
-//        MinecraftForge.EVENT_BUS.register(new JetpackCraftingEvents());
         MinecraftForge.EVENT_BUS.register(new CommonJetpackHandler());
-//        MinecraftForge.EVENT_BUS.register(new ModSounds());
 
-        // Register the item to a creative tab
-        bus.addListener(ThermalJetpacks::addCreative);
-
+        bus.addListener(this::commonSetup);
+        bus.addListener(this::clientSetup);
+        bus.addListener(this::addCreative);
         ModConfig.register();
         RegistryHandler.init();
     }
 
-    public static void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTab() == BuiltInRegistries.CREATIVE_MODE_TAB.get(new ResourceLocation("thermal", "thermal.tools"))) {
-            System.out.println("Adding jetpacks to creative tab");
-            ModItemGroup.registerItems(event);
-        }
+    private final static ResourceLocation creativeTab_thermalTools = new ResourceLocation("thermal", "thermal.tools");
+    private final static ResourceLocation creativeTab_thermalItems = new ResourceLocation("thermal", "thermal.items");
+//    private final static ResourceLocation creativeTab_custom = new ResourceLocation(MOD_ID, "my_tab");
+
+    private boolean toolsTab(Item item) {
+        return item instanceof JetpackItem || item instanceof PilotGogglesItem;
     }
 
+    public void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTab() == BuiltInRegistries.CREATIVE_MODE_TAB.get(creativeTab_thermalTools)) {
+            for (RegistryObject<Item> i : RegistryHandler.ITEMS.getEntries()) {
+                Item item = i.get();
+                if (toolsTab(item)) {
+                    event.accept(new ItemStack(item));
+                    if (item instanceof JetpackItem jetpackItem) event.accept(jetpackItem.asChargedCopy());
+                }
+            }
+        } else if (event.getTab() == BuiltInRegistries.CREATIVE_MODE_TAB.get(creativeTab_thermalItems)) {
+            for (RegistryObject<Item> i : RegistryHandler.ITEMS.getEntries()) {
+                Item item = i.get();
+//                String id = BuiltInRegistries.ITEM.getKey(item).toString();
+                if (!toolsTab(item))
+                    event.accept(new ItemStack(item));
+            }
+        }
+        //If there are no thermal tabs, add to the custom tab
+//        else if (event.getTab() == BuiltInRegistries.CREATIVE_MODE_TAB.get(creativeTab_custom)) {
+//            for (RegistryObject<Item> i : RegistryHandler.ITEMS.getEntries()) {
+//                Item item = i.get();
+//                event.accept(new ItemStack(item));
+//                if (item instanceof JetpackItem jetpackItem) {
+//                    event.accept(jetpackItem.asChargedCopy());
+//                }
+//            }
+//        }
+    }
+
+
     private void commonSetup(final FMLCommonSetupEvent event) {
-        LOGGER.info("Common Setup Method registered.");
         NetworkHandler.registerMessages();
     }
 
+    //TODO: Add a custom creative tab if the thermal mod is not loaded
+//    @SubscribeEvent
+//    public static void registerTabs(RegisterEvent event) {
+//        if (!event.getRegistryKey().equals(Registries.CREATIVE_MODE_TAB)) return;
+//
+//        // If Thermal mods are installed, skip creating your tab
+//        if (ModList.get().isLoaded("thermal")) {
+//            LOGGER.info("Thermal is present → no custom tab needed");
+//            return;
+//        }
+//
+//        LOGGER.info("Thermal NOT found → creating custom tab");
+//
+//        event.register(Registries.CREATIVE_MODE_TAB, helper -> helper.register(
+//                creativeTab_custom,
+//                CreativeModeTab.builder()
+//                        .title(Component.translatable("itemGroup.my_tab"))
+//                        .icon(() -> new ItemStack(RegistryHandler.COMBUSTION_CHAMBER.get()))
+//                        .displayItems((params, output) -> {
+//                            output.accept(Items.DIAMOND);
+//                        })
+//                        .build()
+//        ));
+//    }
+
+
     private void clientSetup(final FMLClientSetupEvent event) {
-        //Get all creative tabs
-//        Registry<CreativeModeTab> tabRegistry = BuiltInRegistries.CREATIVE_MODE_TAB;
-//        for (ResourceKey<CreativeModeTab> key : tabRegistry.registryKeySet()) {
-//            System.out.println("Creative Tab: " + key.location());
-//        }
-//        for (CreativeModeTab tab : BuiltInRegistries.CREATIVE_MODE_TAB) {
-//            System.out.println("Tab ID: " + BuiltInRegistries.CREATIVE_MODE_TAB.getKey(tab));
-//            System.out.println("Tab Title: " + tab.getDisplayName().getString());
-//        }
-
-        //Check if the target tab exists, if not, register a custom tab
-        ResourceLocation targetTabId = new ResourceLocation("thermal", "thermal.tools");
-        boolean tabExists = BuiltInRegistries.CREATIVE_MODE_TAB.containsKey(targetTabId);
-        if (!tabExists) {
-            CREATIVE_TAB.register(MOD_ID + ".main", ModItemGroup::new);
-            CREATIVE_TAB.register(FMLJavaModLoadingContext.get().getModEventBus());
-        }
-
-        LOGGER.info("Client Setup Method registered.");
-
         MinecraftForge.EVENT_BUS.register(new KeybindHandler());
         MinecraftForge.EVENT_BUS.register(new ClientJetpackHandler());
         MinecraftForge.EVENT_BUS.register(new HUDHandler());
@@ -178,12 +208,10 @@ Tab Title: itemGroup.tjetpacks.main
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        LOGGER.info("Server starting...");
     }
 
     @SubscribeEvent
     public void onServerStopping(ServerStoppingEvent event) {
-        LOGGER.info("Server stopping...");
         CommonJetpackHandler.clear();
     }
 

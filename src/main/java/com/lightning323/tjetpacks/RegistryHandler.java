@@ -6,10 +6,12 @@ import com.lightning323.tjetpacks.item.JetpackItem;
 import com.lightning323.tjetpacks.item.JetpackType;
 import com.lightning323.tjetpacks.item.PilotGogglesItem;
 import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
@@ -17,6 +19,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.HashMap;
 
 import static com.lightning323.tjetpacks.ThermalJetpacks.MOD_ID;
 
@@ -30,7 +34,7 @@ public class RegistryHandler {
 
     //Sounds
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MOD_ID);
-//    public static final SoundEvent JETPACK = SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "jetpack"));
+    //    public static final SoundEvent JETPACK = SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "jetpack"));
 //    public static final SoundEvent JETPACK_OTHER = SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "jetpack_other"));
 //    public static final SoundEvent ROCKET = SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "rocket"));
     public static final RegistryObject<SoundEvent> SOUND_JETPACK = SOUNDS.register("jetpack", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MOD_ID, "jetpack")));
@@ -49,13 +53,12 @@ public class RegistryHandler {
 
     // Particles:
 //    public static final RegistryObject<SimpleParticleType> RAINBOW_PARTICLE = PARTICLE_TYPES.register("rainbow_particle", () -> new SimpleParticleType(false));
-    // Recipes:
-//    public static final RegistryObject<RecipeSerializer<JetpackCustomRecipe>> JETPACK_CUSTOM_RECIPE = RECIPE_SERIALIZERS.register("jetpack_custom_recipe",() -> new SimpleCraftingRecipeSerializer<>((location, category) -> new JetpackCustomRecipe(location)));
 
     // Enchantments:
     public static final EnchantmentCategory JETPACK_ENCHANTMENT_TYPE = EnchantmentCategory.create("JETPACK", (item -> item instanceof JetpackItem));
     public static final RegistryObject<EnchantmentFuelEfficiency> FUEL_EFFICIENCY = ENCHANTMENTS.register("fuel_efficiency", EnchantmentFuelEfficiency::new);
 
+    //Items
     public static final RegistryObject<PilotGogglesItem> PILOT_GOGGLES_GOLD = ITEMS.register("pilot_goggles_gold", () -> new PilotGogglesItem("gold"));
     public static final RegistryObject<PilotGogglesItem> PILOT_GOGGLES_IRON = ITEMS.register("pilot_goggles_iron", () -> new PilotGogglesItem("iron"));
     public static final RegistryObject<Item> LEATHER_STRAP = ITEMS.register("leather_strap", () -> new Item(new Item.Properties()));
